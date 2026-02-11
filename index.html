@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<title>qpLand - موبایل فرندلی</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* ===== انیمیشن ورود صفحه ===== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glowPulse {
+    0% { text-shadow: 0 0 5px #fff, 0 0 15px #bb66ff, 0 0 30px #6600cc; }
+    50% { text-shadow: 0 0 10px #fff, 0 0 25px #bb66ff, 0 0 50px #6600cc; }
+    100% { text-shadow: 0 0 5px #fff, 0 0 15px #bb66ff, 0 0 30px #6600cc; }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: radial-gradient(circle at center, #1a0033, #0a0011, #000000);
+    color: white;
+    animation: fadeIn 0.8s ease;
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 100px; /* فضا برای دکمه پایین */
+}
+
+/* ===== نوار بالا - ریسپانسیو ===== */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 12px 15px;
+    backdrop-filter: blur(15px);
+    background: rgba(10, 0, 20, 0.7);
+    text-align: center;
+    box-shadow: 0 0 30px rgba(102, 0, 204, 0.5);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-bottom: 1px solid rgba(187, 102, 255, 0.3);
+}
+
+.navbar a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 30px;
+    background: rgba(102, 0, 204, 0.2);
+    border: 1px solid rgba(187, 102, 255, 0.3);
+}
+
+.navbar a:hover {
+    color: #fff;
+    background: rgba(187, 102, 255, 0.3);
+    text-shadow: 0 0 15px #bb66ff;
+    border-color: #bb66ff;
+}
+
+/* ===== محتوا - ریسپانسیو ===== */
+.container {
+    text-align: center;
+    padding: 100px 20px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+h1 {
+    font-size: clamp(32px, 10vw, 50px);
+    animation: glowPulse 3s infinite;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    word-break: break-word;
+}
+
+h1::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #bb66ff, #6600cc, transparent);
+    margin: 20px auto 0;
+    border-radius: 3px;
+}
+
+/* ===== دکمه شروع - ریسپانسیو ===== */
+.button-main {
+    padding: 15px 40px;
+    font-size: 18px;
+    background: linear-gradient(145deg, #6600cc, #440088);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: 0.3s;
+    border: 1px solid rgba(255,255,255,0.3);
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 10px 20px rgba(102, 0, 204, 0.3);
+    width: auto;
+    min-width: 200px;
+}
+
+.button-main:hover {
+    background: linear-gradient(145deg, #bb66ff, #6600cc);
+    box-shadow: 0 0 30px #bb66ff;
+    transform: translateY(-3px);
+}
+
+.button-main:active {
+    transform: translateY(0);
+}
+
+/* ripple effect - بهبود یافته */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.6);
+    transform: scale(0);
+    animation: rippleEffect 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes rippleEffect {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* ===== پنجره popup - ریسپانسیو ===== */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(20, 0, 40, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 30px 25px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 0 40px #bb66ff, 0 0 20px #6600cc inset;
+    z-index: 2000;
+    display: none;
+    width: 90%;
+    max-width: 400px;
+    border: 1px solid rgba(187, 102, 255, 0.5);
+}
+
+.popup h2 {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-shadow: 0 0 10px #bb66ff;
+}
+
+.popup p {
+    font-size: 22px;
+    background: rgba(0,0,0,0.4);
+    padding: 15px;
+    border-radius: 15px;
+    margin: 20px 0;
+    border: 1px solid #bb66ff;
+    word-break: break-all;
+}
+
+/* دکمه کپی و بستن - ریسپانسیو */
+.copy-btn, .close-btn {
+    padding: 12px 25px;
+    margin: 8px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(145deg, #6600cc, #440088);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border: 1px solid rgba(255,255,255,0.3);
+    font-weight: 500;
+    min-width: 120px;
+}
+
+.copy-btn:hover, .close-btn:hover {
+    background: linear-gradient(145deg, #bb66ff, #6600cc);
+    box-shadow: 0 0 25px #bb66ff;
+    transform: scale(1.05);
+}
+
+.copy-btn:active, .close-btn:active {
+    transform: scale(0.95);
+}
+
+/* overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(5px);
+    z-index: 1500;
+    display: none;
+}
+
+/* ===== آیکون دکمه ثابت - کاملاً ریسپانسیو ===== */
+.icon-btn {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    background: rgba(20, 0, 40, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(187, 102, 255, 0.5);
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+    transition: 0.3s;
+    position: fixed;
+    z-index: 1100;
+}
+
+.icon-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px #bb66ff, 0 0 20px #6a0dad inset;
+    border-color: #fff;
+}
+
+.icon-btn i {
+    filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+}
+
+/* ===== جایگذاری دکمه ها - ریسپانسیو ===== */
+#btn1 { 
+    top: 120px; 
+    left: 20px; 
+}
+
+#btn2 { 
+    top: 120px; 
+    right: 20px; 
+}
+
+#btn3 { 
+    bottom: 20px; 
+    left: 50%; 
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #6600cc, #440088);
+    border: 2px solid rgba(255,255,255,0.5);
+}
+
+/* ===== استایل‌های اختصاصی موبایل ===== */
+@media (max-width: 768px) {
+    body {
+        padding-bottom: 120px;
+    }
+    
+    .navbar {
+        padding: 10px;
+        justify-content: space-around;
+    }
+    
+    .navbar a {
+        margin: 0 5px;
+        font-size: 14px;
+        padding: 8px 12px;
+        flex: 0 1 auto;
+    }
+    
+    .container {
+        padding-top: 120px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    h1 {
+        font-size: 36px;
+        margin-bottom: 25px;
+    }
+    
+    .button-main {
+        min-width: 180px;
+        padding: 16px 35px;
+        font-size: 18px;
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .popup {
+        width: 92%;
+        padding: 25px 20px;
+    }
+    
+    .popup p {
+        font-size: 20px;
+        padding: 12px;
+    }
+    
+    .copy-btn, .close-btn {
+        padding: 14px 20px;
+        min-width: 130px;
+        font-size: 16px;
+    }
+    
+    /* تنظیم مجدد موقعیت دکمه‌ها برای موبایل */
+    #btn1 { 
+        top: auto; 
+        bottom: 100px; 
+        left: 20px; 
+        width: 65px;
+        height: 65px;
+        font-size: 26px;
+    }
+    
+    #btn2 { 
+        top: auto; 
+        bottom: 100px; 
+        right: 20px; 
+        width: 65px;
+        height: 65px;
+        font-size: 26px;
+    }
+    
+    #btn3 { 
+        bottom: 20px; 
+        width: 70px;
+        height: 70px;
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar a {
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+    
+    h1 {
+        font-size: 32px;
+    }
+    
+    .icon-btn {
+        width: 55px;
+        height: 55px;
+        font-size: 24px;
+    }
+    
+    #btn1, #btn2 {
+        width: 55px;
+        height: 55px;
+        bottom: 90px;
+        font-size: 24px;
+    }
+    
+    #btn3 {
+        width: 60px;
+        height: 60px;
+        font-size: 26px;
+    }
+    
+    .popup h2 {
+        font-size: 22px;
+    }
+    
+    .popup p {
+        font-size: 18px;
+    }
+    
+    .copy-btn, .close-btn {
+        padding: 12px 15px;
+        min-width: 110px;
+        font-size: 15px;
+    }
+}
+
+/* ===== برای نمایش بهتر در لنداسکیپ ===== */
+@media (max-height: 500px) and (orientation: landscape) {
+    .container {
+        padding-top: 90px;
+    }
+    
+    h1 {
+        font-size: 30px;
+        margin-bottom: 15px;
+    }
+    
+    #btn1, #btn2 {
+        bottom: 20px;
+        top: auto;
+    }
+    
+    #btn3 {
+        bottom: 20px;
+    }
+}
+
+/* ===== اسکرول بار شخصی‌سازی شده ===== */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a0033;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #6600cc, #bb66ff);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #bb66ff, #6600cc);
+}
+</style>
+</head>
+
+<body>
+
+<!-- نوار بالا - ریسپانسیو -->
+<div class="navbar">
+    <a href="Game.html"><i class="fas fa-gamepad"></i> بازی‌ها</a>
+    <a href="Contact.html"><i class="fas fa-info-circle"></i> درباره ما</a>
+    <a onclick="window.close();"><i class="fas fa-sign-out-alt"></i> خروج</a>
+</div>
+
+<!-- محتوا -->
+<div class="container">
+    <h1>✨ parsa_qxp ✨</h1>
+    <button class="button-main" onclick="openPopup()">
+        <i class="fas fa-phone-alt"></i> تماس با من
+    </button>
+</div>
+
+<!-- دکمه آیکونی ثابت - ریسپانسیو -->
+<a href="Rank.html" class="icon-btn" id="btn1">
+    <i class="fas fa-rocket"></i>
+</a>
+
+<a href="Game.html" class="icon-btn" id="btn2">
+    <i class="fas fa-gamepad"></i>
+</a>
+
+<a href="Contact.html" class="icon-btn" id="btn3">
+    <i class="fas fa-user"></i>
+</a>
+
+<!-- overlay -->
+<div class="overlay" id="overlay" onclick="closePopup()"></div>
+
+<!-- popup - ریسپانسیو -->
+<div class="popup" id="popup">
+    <h2><i class="fas fa-mobile-alt"></i> شماره تماس</h2>
+    <p id="copyText">09945158877</p>
+    <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+        <button class="copy-btn" onclick="copyTextFunc()">
+            <i class="fas fa-copy"></i> کپی
+        </button>
+        <button class="close-btn" onclick="closePopup()">
+            <i class="fas fa-times"></i> بستن
+        </button>
+    </div>
+</div>
+
+<script>
+/* ripple effect برای دکمه‌ها */
+document.querySelectorAll(".button-main").forEach(button => {
+    button.addEventListener("click", function(e) {
+        const circle = document.createElement("span");
+        circle.classList.add("ripple");
+        const rect = button.getBoundingClientRect();
+        circle.style.left = e.clientX - rect.left + "px";
+        circle.style.top = e.clientY - rect.top + "px";
+        circle.style.width = circle.style.height = Math.max(rect.width, rect.height) + "px";
+        button.appendChild(circle);
+        setTimeout(() => circle.remove(), 600);
+    });
+});
+
+/* باز و بسته کردن popup */
+function openPopup() {
+    document.getElementById("popup").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+    document.body.style.overflow = "hidden"; // جلوگیری از اسکرول
+}
+
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+    document.body.style.overflow = "auto"; // برگردوندن اسکرول
+}
+
+/* کپی کردن متن */
+function copyTextFunc() {
+    const text = document.getElementById("copyText").innerText;
+    navigator.clipboard.writeText(text).then(() => {
+        // نمایش پیام خوشگل به جای alert
+        const btn = event.target.closest('button');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> کپی شد!';
+        btn.style.background = '#00cc88';
+        setTimeout(() => {
+            btn.innerHTML = '<i class="fas fa-copy"></i> کپی';
+            btn.style.background = 'linear-gradient(145deg, #6600cc, #440088)';
+        }, 1500);
+    });
+}
+
+// بستن با کلید Escape
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closePopup();
+    }
+});
+
+// جلوگیری از اسکرول صفحه وقتی popup بازه
+window.addEventListener('load', function() {
+    const popup = document.getElementById('popup');
+    const overlay = document.getElementById('overlay');
+    
+    if (popup.style.display === 'block') {
+        document.body.style.overflow = 'hidden';
+    }
+});
+</script>
+
+<!-- اضافه کردن آیکون‌های بیشتر برای حس بهتر -->
+<div style="position: fixed; bottom: 10px; right: 10px; opacity: 0.3; font-size: 12px; color: #bb66ff; z-index: 50;">
+    <i class="fas fa-mobile-alt"></i> Mobile Optimized
+</div>
+
+</body>
+</html>

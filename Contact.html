@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="theme-color" content="#6600cc">
+<title>Contact Us - ارتباط با ما</title>
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* ===== انیمیشن‌ها ===== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glowPulse {
+    0% { text-shadow: 0 0 5px #fff, 0 0 15px #bb66ff, 0 0 30px #6600cc; }
+    50% { text-shadow: 0 0 15px #fff, 0 0 30px #bb66ff, 0 0 50px #6600cc; }
+    100% { text-shadow: 0 0 5px #fff, 0 0 15px #bb66ff, 0 0 30px #6600cc; }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+    background: radial-gradient(circle at center, #1a0033, #0a0011, #000000);
+    color: white;
+    animation: fadeIn 0.8s ease;
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.05"><circle cx="50" cy="50" r="40" fill="none" stroke="%23bb66ff" stroke-width="1"/><path d="M20 50 L80 50 M50 20 L50 80" stroke="%236600cc" stroke-width="1"/></svg>');
+    background-size: 100px 100px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ===== کانتینر اصلی ===== */
+.container {
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0 40px;
+    position: relative;
+    z-index: 10;
+}
+
+/* ===== هدر و دکمه خانه ===== */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    padding: 15px 30px;
+    background: rgba(20, 0, 40, 0.7);
+    backdrop-filter: blur(15px);
+    border-radius: 50px;
+    border: 1px solid rgba(187, 102, 255, 0.4);
+    box-shadow: 0 0 30px rgba(102, 0, 204, 0.4);
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.header h1 {
+    font-size: clamp(24px, 5vw, 36px);
+    margin: 0;
+    animation: glowPulse 3s infinite;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header h1 i {
+    color: #bb66ff;
+    filter: drop-shadow(0 0 15px #bb66ff);
+    animation: spin 10s linear infinite;
+}
+
+/* ===== دکمه اصلی ===== */
+.button-main {
+    padding: 14px 32px;
+    font-size: 18px;
+    background: linear-gradient(145deg, #6600cc, #440088);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: 0.3s;
+    border: 1px solid rgba(255,255,255,0.2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 10px 25px rgba(102,0,204,0.5);
+}
+
+.button-main:hover {
+    background: linear-gradient(145deg, #bb66ff, #6600cc);
+    box-shadow: 0 0 35px #bb66ff, 0 0 70px #6600cc;
+    transform: translateY(-3px);
+    border-color: rgba(255,255,255,0.5);
+}
+
+.button-main:active {
+    transform: translateY(0);
+}
+
+.button-main i {
+    font-size: 18px;
+    filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+}
+
+/* ===== عنوان صفحه ===== */
+.page-title {
+    text-align: center;
+    margin: 30px 0 50px;
+    position: relative;
+}
+
+.page-title h2 {
+    font-size: clamp(32px, 7vw, 52px);
+    color: white;
+    text-shadow: 0 0 20px #bb66ff, 0 0 40px #6600cc;
+    display: inline-block;
+    padding: 15px 45px;
+    background: rgba(102,0,204,0.2);
+    border-radius: 80px;
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(187,102,255,0.4);
+    animation: float 3s infinite ease-in-out;
+}
+
+.page-title i {
+    margin: 0 15px;
+    color: #bb66ff;
+    filter: drop-shadow(0 0 15px #bb66ff);
+}
+
+.page-title span {
+    display: block;
+    font-size: 18px;
+    color: rgba(255,255,255,0.8);
+    margin-top: 20px;
+    font-weight: normal;
+    text-shadow: none;
+}
+
+/* ===== گرید کارت‌های ارتباطی ===== */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+/* ===== کارت ارتباطی ===== */
+.contact-card {
+    background: rgba(25, 0, 45, 0.85);
+    backdrop-filter: blur(20px);
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+    padding: 35px 25px;
+    border-radius: 35px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(187, 102, 255, 0.4);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    animation: float 5s infinite ease-in-out;
+    animation-delay: calc(var(--i, 0) * 0.2s);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+.contact-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(187,102,255,0.15) 0%, transparent 70%);
+    opacity: 0;
+    transition: 0.5s;
+    transform: rotate(45deg);
+}
+
+.contact-card:hover {
+    transform: scale(1.08) translateY(-12px);
+    box-shadow: 0 0 45px #bb66ff, 0 0 90px #6600cc;
+    border-color: #bb66ff;
+    background: rgba(45, 0, 75, 0.95);
+}
+
+.contact-card:hover::before {
+    opacity: 1;
+    top: -30%;
+    left: -30%;
+}
+
+/* ===== آیکون کارت ===== */
+.card-icon {
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(145deg, #6600cc, #330066);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    border: 3px solid rgba(255,255,255,0.3);
+    box-shadow: 0 0 30px rgba(187,102,255,0.7);
+    transition: 0.4s;
+}
+
+.contact-card:hover .card-icon {
+    transform: rotate(360deg) scale(1.1);
+    border-color: white;
+    box-shadow: 0 0 50px #bb66ff;
+}
+
+.card-icon i {
+    font-size: 42px;
+    color: white;
+    filter: drop-shadow(0 0 15px rgba(255,255,255,0.7));
+}
+
+/* ===== عنوان کارت ===== */
+.card-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: white;
+    text-shadow: 0 0 15px #bb66ff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ===== آیدی کاربر ===== */
+.card-username {
+    font-size: 22px;
+    background: rgba(102,0,204,0.4);
+    padding: 12px 25px;
+    border-radius: 50px;
+    border: 1px solid rgba(187,102,255,0.5);
+    margin: 15px 0;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #fff;
+    font-weight: 500;
+    letter-spacing: 1px;
+    word-break: break-all;
+}
+
+.card-username i {
+    color: #88ff88;
+    font-size: 18px;
+}
+
+/* ===== دکمه کپی ===== */
+.copy-btn {
+    padding: 12px 30px;
+    font-size: 16px;
+    background: linear-gradient(145deg, #4a4a4a, #2a2a2a);
+    border: none;
+    border-radius: 40px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    border: 1px solid rgba(255,255,255,0.2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+.copy-btn:hover {
+    background: linear-gradient(145deg, #00cc88, #009966);
+    box-shadow: 0 0 25px #00cc88;
+    transform: scale(1.05);
+    border-color: white;
+}
+
+.copy-btn:active {
+    transform: scale(0.95);
+}
+
+.copy-btn i {
+    font-size: 16px;
+}
+
+/* ===== استایل اختصاصی برای هر پلتفرم ===== */
+.contact-card[data-platform="telegram"] .card-icon { background: linear-gradient(145deg, #0088cc, #006699); }
+.contact-card[data-platform="whatsapp"] .card-icon { background: linear-gradient(145deg, #25D366, #128C7E); }
+.contact-card[data-platform="instagram"] .card-icon { background: linear-gradient(145deg, #E4405F, #833AB4); }
+.contact-card[data-platform="tiktok"] .card-icon { background: linear-gradient(145deg, #000000, #333333); }
+.contact-card[data-platform="github"] .card-icon { background: linear-gradient(145deg, #333333, #111111); }
+.contact-card[data-platform="email"] .card-icon { background: linear-gradient(145deg, #EA4335, #B23121); }
+
+/* ===== فوتر ===== */
+.footer {
+    text-align: center;
+    margin-top: 80px;
+    padding: 35px;
+    border-top: 1px solid rgba(187,102,255,0.3);
+    color: rgba(255,255,255,0.8);
+    font-size: 16px;
+    position: relative;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+    border-radius: 50px 50px 0 0;
+}
+
+.footer i {
+    color: #bb66ff;
+    margin: 0 5px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.social-links a {
+    color: white;
+    font-size: 24px;
+    width: 55px;
+    height: 55px;
+    background: rgba(102,0,204,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    border: 1px solid rgba(187,102,255,0.4);
+}
+
+.social-links a:hover {
+    transform: translateY(-8px) scale(1.1);
+    background: #6600cc;
+    box-shadow: 0 0 30px #bb66ff;
+}
+
+/* ===== استایل‌های موبایل ===== */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+    
+    .header {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+        border-radius: 35px;
+    }
+    
+    .header h1 {
+        font-size: 30px;
+    }
+    
+    .button-main {
+        width: 100%;
+        max-width: 220px;
+        padding: 14px 25px;
+    }
+    
+    .page-title h2 {
+        font-size: 36px;
+        padding: 12px 30px;
+    }
+    
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding: 10px;
+    }
+    
+    .contact-card {
+        max-width: 100%;
+        padding: 30px 20px;
+    }
+    
+    .card-icon {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .card-icon i {
+        font-size: 36px;
+    }
+    
+    .card-title {
+        font-size: 26px;
+    }
+    
+    .card-username {
+        font-size: 20px;
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 12px;
+    }
+    
+    .header {
+        padding: 15px;
+    }
+    
+    .header h1 {
+        font-size: 26px;
+    }
+    
+    .button-main {
+        max-width: 200px;
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+    
+    .page-title h2 {
+        font-size: 30px;
+        padding: 10px 20px;
+    }
+    
+    .page-title span {
+        font-size: 16px;
+    }
+    
+    .contact-grid {
+        gap: 20px;
+    }
+    
+    .contact-card {
+        padding: 25px 15px;
+    }
+    
+    .card-icon {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 20px;
+    }
+    
+    .card-icon i {
+        font-size: 32px;
+    }
+    
+    .card-title {
+        font-size: 24px;
+    }
+    
+    .card-username {
+        font-size: 18px;
+        padding: 8px 16px;
+    }
+    
+    .copy-btn {
+        padding: 10px 25px;
+        font-size: 15px;
+    }
+    
+    .footer {
+        padding: 25px;
+        margin-top: 60px;
+    }
+    
+    .social-links a {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+    }
+}
+
+/* ===== دکمه اسکرول به بالا ===== */
+.scroll-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #6600cc, #440088);
+    color: white;
+    border: 2px solid rgba(255,255,255,0.3);
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    box-shadow: 0 0 30px rgba(102,0,204,0.7);
+    transition: 0.3s;
+    font-size: 22px;
+}
+
+.scroll-top:hover {
+    transform: scale(1.1);
+    background: linear-gradient(145deg, #bb66ff, #6600cc);
+    box-shadow: 0 0 45px #bb66ff;
+    border-color: white;
+}
+
+@media (max-width: 768px) {
+    .scroll-top {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .scroll-top {
+        bottom: 15px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+}
+
+/* ===== اسکرول بار ===== */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a0033;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #6600cc, #bb66ff);
+    border-radius: 10px;
+    border: 2px solid #1a0033;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #bb66ff, #6600cc);
+}
+</style>
+<body>
+
+<!-- کانتینر اصلی -->
+<div class="container">
+    
+    <!-- هدر با دکمه خانه -->
+    <div class="header">
+        <h1>
+            <i class="fas fa-headset"></i>
+            Contact
+        </h1>
+        <a href="index.html" style="text-decoration: none;">
+            <button class="button-main">
+                <i class="fas fa-home"></i>
+                صفحه اصلی
+            </button>
+        </a>
+    </div>
+    
+    <!-- عنوان صفحه -->
+    <div class="page-title">
+        <h2>
+            <i class="fas fa-star"></i>
+            ارتباط با ما
+            <i class="fas fa-star"></i>
+        </h2>
+        <span>راه‌های ارتباطی - ۲۴ ساعته در خدمتیم</span>
+    </div>
+    
+    <!-- گرید کارت‌های ارتباطی -->
+    <div class="contact-grid">
+        
+        <!-- تلگرام -->
+        <div class="contact-card" data-platform="telegram" style="--i: 1;" onclick="copyText('@parsa_qxp', 'telegram')">
+            <div class="card-icon">
+                <i class="fab fa-telegram-plane"></i>
+            </div>
+            <div class="card-title">
+                <span>تلگرام</span>
+            </div>
+            <div class="card-username">
+                <i class="fas fa-at"></i>
+                @parsa_qxp
+            </div>
+            <button class="copy-btn" onclick="event.stopPropagation(); copyText('@parsa_qxp', 'telegram')">
+                <i class="fas fa-copy"></i>
+                کپی آیدی
+            </button>
+        </div>
+        
+        <!-- واتساپ -->
+        <div class="contact-card" data-platform="whatsapp" style="--i: 2;" onclick="copyText('@parsa_qxp', 'whatsapp')">
+            <div class="card-icon">
+                <i class="fab fa-whatsapp"></i>
+            </div>
+            <div class="card-title">
+                <span>واتساپ</span>
+            </div>
+            <div class="card-username">
+                <i class="fas fa-at"></i>
+                @parsa_qxp
+            </div>
+            <button class="copy-btn" onclick="event.stopPropagation(); copyText('@parsa_qxp', 'whatsapp')">
+                <i class="fas fa-copy"></i>
+                کپی آیدی
+            </button>
+        </div>
+        
+        <!-- اینستاگرام -->
+        <div class="contact-card" data-platform="instagram" style="--i: 3;" onclick="copyText('@parsa_qxp', 'instagram')">
+            <div class="card-icon">
+                <i class="fab fa-instagram"></i>
+            </div>
+            <div class="card-title">
+                <span>اینستاگرام</span>
+            </div>
+            <div class="card-username">
+                <i class="fas fa-at"></i>
+                @parsa_qxp
+            </div>
+            <button class="copy-btn" onclick="event.stopPropagation(); copyText('@parsa_qxp', 'instagram')">
+                <i class="fas fa-copy"></i>
+                کپی آیدی
+            </button>
+        </div>
+        
+        <!-- تیک تاک -->
+        <div class="contact-card" data-platform="tiktok" style="--i: 4;" onclick="copyText('@parsa_qxp', 'tiktok')">
+            <div class="card-icon">
+                <i class="fab fa-tiktok"></i>
+            </div>
+            <div class="card-title">
+                <span>تیک تاک</span>
+            </div>
+            <div class="card-username">
+                <i class="fas fa-at"></i>
+                @parsa_qxp
+            </div>
+            <button class="copy-btn" onclick="event.stopPropagation(); copyText('@parsa_qxp', 'tiktok')">
+                <i class="fas fa-copy"></i>
+                کپی آیدی
+            </button>
+        </div>
+        
+        <!-- گیت هاب -->
+        <div class="contact-card" data-platform="github" style="--i: 5;" onclick="copyText('@parsa_qxp', 'github')">
+            <div class="card-icon">
+                <i class="fab fa-github"></i>
+            </div>
+            <div class="card-title">
+                <span>گیت هاب</span>
+            </div>
+            <div class="card-username">
+                <i class="fas fa-at"></i>
+                @parsa_qxp
+            </div>
+            <button class="copy-btn" onclick="event.stopPropagation(); copyText('@parsa_qxp', 'github')">
+                <i class="fas fa-copy"></i>
+                کپی آیدی
+            </button>
+        </div>
+        
+        <!-- ایمیل -->
+        <div class="contact-card" data-platform="email" style="--i: 6;" onclick="copyText('parsapanah232@gmail.com', 'email')">
+            <div class="card-icon">
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div class="card-title">
+                <span>ایمیل</span>
+            </div>
+            <div class="card-username">
+                <i class="fas fa-at"></i>
+                parsapanah232@gmail.com
+            </div>
+            <button class="copy-btn" onclick="event.stopPropagation(); copyText('parsapanah232@gmail.com', 'email')">
+                <i class="fas fa-copy"></i>
+                کپی ایمیل
+            </button>
+        </div>
+    </div>
+    
+    <!-- فوتر -->
+    <div class="footer">
+        <p>
+            <i class="fas fa-heart" style="color: #ff4488;"></i>
+            ما را در شبکه‌های اجتماعی دنبال کنید
+            <i class="fas fa-heart" style="color: #ff4488;"></i>
+        </p>
+        
+        <div class="social-links">
+            <a href="https://t.me/parsa_qxp" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+            <a href="https://wa.me/09945158877" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://instagram.com/parsa_qxp" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://tiktok.com/@parsa_qxp" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://github.com/parsa_qxp" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+        
+        <p style="margin-top: 25px; font-size: 14px;">
+            <i class="fas fa-mobile-alt"></i>
+            بهینه شده برای موبایل و دسکتاپ
+        </p>
+        <p style="font-size: 13px; margin-top: 10px; color: rgba(255,255,255,0.6);">
+            <i class="fas fa-copyright"></i>
+            تمامی حقوق محفوظ است - 2025
+        </p>
+    </div>
+</div>
+
+<!-- دکمه اسکرول به بالا -->
+<button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+// تابع کپی متن
+function copyText(text, platform) {
+    navigator.clipboard.writeText(text).then(() => {
+        // پیدا کردن دکمه کلیک شده
+        const buttons = document.querySelectorAll('.copy-btn');
+        let clickedBtn = null;
+        
+        buttons.forEach(btn => {
+            if (btn.closest('.contact-card') === document.activeElement?.closest('.contact-card') || 
+                event?.target?.closest('.copy-btn')) {
+                clickedBtn = event.target.closest('.copy-btn');
+            }
+        });
+        
+        if (clickedBtn) {
+            const originalHTML = clickedBtn.innerHTML;
+            clickedBtn.innerHTML = '<i class="fas fa-check"></i> کپی شد!';
+            clickedBtn.style.background = 'linear-gradient(145deg, #00cc88, #009966)';
+            
+            setTimeout(() => {
+                clickedBtn.innerHTML = originalHTML;
+                clickedBtn.style.background = 'linear-gradient(145deg, #4a4a4a, #2a2a2a)';
+            }, 2000);
+        }
+        
+        // نمایش پیام کپی
+        showNotification(`✅ آیدی ${platform} کپی شد`);
+    }).catch(err => {
+        showNotification('❌ خطا در کپی کردن', 'error');
+    });
+}
+
+// نمایش نوتیفیکیشن
+function showNotification(message, type = 'success') {
+    const notification = document.createElement('div');
+    notification.style.position = 'fixed';
+    notification.style.top = '20px';
+    notification.style.left = '50%';
+    notification.style.transform = 'translateX(-50%)';
+    notification.style.padding = '15px 30px';
+    notification.style.background = type === 'success' ? 'linear-gradient(145deg, #00cc88, #009966)' : 'linear-gradient(145deg, #cc0000, #990000)';
+    notification.style.color = 'white';
+    notification.style.borderRadius = '50px';
+    notification.style.boxShadow = '0 0 30px rgba(0,204,136,0.5)';
+    notification.style.zIndex = '10000';
+    notification.style.fontSize = '16px';
+    notification.style.fontWeight = '500';
+    notification.style.display = 'flex';
+    notification.style.alignItems = 'center';
+    notification.style.gap = '10px';
+    notification.style.border = '1px solid rgba(255,255,255,0.3)';
+    notification.style.backdropFilter = 'blur(10px)';
+    notification.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i> ${message}`;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        notification.style.transition = '0.5s';
+        setTimeout(() => notification.remove(), 500);
+    }, 2500);
+}
+
+// نمایش دکمه اسکرول به بالا
+window.addEventListener('scroll', function() {
+    const btn = document.getElementById('scrollTopBtn');
+    if (window.scrollY > 300) {
+        btn.style.display = 'flex';
+    } else {
+        btn.style.display = 'none';
+    }
+});
+
+// نمایش دکمه در صورت اسکرول اولیه
+document.addEventListener('DOMContentLoaded', function() {
+    const btn = document.getElementById('scrollTopBtn');
+    if (window.scrollY > 300) {
+        btn.style.display = 'flex';
+    }
+});
+
+// جلوگیری از ارسال فرم
+document.querySelectorAll('.contact-card').forEach(card => {
+    card.addEventListener('click', function(e) {
+        // کپی کردن انجام میشه
+    });
+});
+</script>
+
+</body>
+</html>
